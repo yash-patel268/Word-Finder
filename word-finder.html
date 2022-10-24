@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Word Finder</title>
+
+    <!-- Load any supplemental Javascript libraries here -->
+    <script type="text/javascript" src="jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="words-small.json"></script>
+    <script type="text/javascript" src="words-large.json"></script>
+
+    <script type="text/javascript" src="dictionary.js"></script>
+
+    <script type="text/javascript">
+      // <![CDATA[
+      
+      // This allows the Javascript code inside this block to only run when the page
+      // has finished loading in the browser.
+      $(document).ready(function() {
+        var dict = new Dictionary(words);
+        // Your code here
+      
+      });
+      
+      // ]]>
+      </script>
+
+    <style type="text/css">
+
+    /* Your CSS here */
+    html {
+        background-color: #eee;
+    }
+
+    body{
+      margin: 0%;
+      height: 100%;
+      width: 100%;
+    }
+
+    .main{
+      height: 700px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .input{
+      margin: 0;
+    }
+
+    #resultBox {
+      height: 300px;
+      width: 300px;
+      border: 1px solid #ccc;
+      overflow: auto;
+    }
+
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="input">
+        <form>
+          <label>Find:</label>
+          <input type="text" id="findWord" name="findWord" required>
+          <input type="reset" value="Reset">
+          <p>words total</p>
+          <div id="resultBox">text will go here</div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
