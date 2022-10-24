@@ -8,7 +8,8 @@
     <!-- Load any supplemental Javascript libraries here -->
     <script type="text/javascript" src="jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="words-small.json"></script>
-    <script type="text/javascript" src="words-large.json"></script>
+
+    <!-- <script type="text/javascript" src="words-large.json"></script> -->
 
     <script type="text/javascript" src="dictionary.js"></script>
 
@@ -19,9 +20,30 @@
       // has finished loading in the browser.
       $(document).ready(function() {
         var dict = new Dictionary(words);
-        // Your code here
-      
+        var values = dict.all();
+        fillWithWords(values);
       });
+
+      function fillWithWords(values) {
+        document.getElementById("wordCountMessage").innerHTML = values.length + " words total";
+
+        for (var x = 0; x < values.length; x++) {
+          $('#resultBox').append('<option value="' + values[x] + '">' + values[x] + '</option>');
+        }
+      }
+
+      function searchWordsAndUpdateList() {
+        $('#resultBox').find('option').remove().end();
+        var dict = new Dictionary(words);
+        var values = dict.search($("#findWord").val());
+        fillWithWords(values);
+      }
+
+      function clearInput() {
+        var dict = new Dictionary(words);
+        var values = dict.all();
+        fillWithWords(values);
+      }
       
       // ]]>
       </script>
@@ -65,10 +87,11 @@
       <div class="input">
         <form>
           <label>Find:</label>
-          <input type="text" id="findWord" name="findWord" required>
-          <input type="reset" value="Reset">
-          <p>words total</p>
-          <div id="resultBox">text will go here</div>
+          <input type="text" id="findWord" name="findWord" onkeyup="searchWordsAndUpdateList()" required>
+          <input type="reset" onclick="clearInput()" value="Reset">
+          <br>
+          <label id="wordCountMessage"></label>
+          <div id="resultBox"></div>
         </form>
       </div>
     </div>
