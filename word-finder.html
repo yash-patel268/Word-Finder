@@ -5,22 +5,28 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Word Finder</title>
 
+    <!-- Loading in JQuery alongside the JSON files full of words -->
     <script type="text/javascript" src="jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="words-small.json"></script>
 
+    <!-- The large words JSON file is commented out as the functionality is there, however when used it will cause computer to crash -->
     <!-- <script type="text/javascript" src="words-large.json"></script>  -->
 
+    <!-- Loading in the dictionary javascript file which includes the search function -->
     <script type="text/javascript" src="dictionary.js"></script>
 
+    <!-- Loading custom javascript functions -->
     <script type="text/javascript">
     
+      // Once the document is ready it will load all words using fill function
       $(document).ready(function() {
         var dict = new Dictionary(words);
         var values = dict.all();
-        fillWithWords(values);
+        fill(values);
       });
 
-      function fillWithWords(values) {
+      // Custom function used to change DOM of the display message, alongside word list
+      function fill(values) {
         document.getElementById("wordCountMessage").innerHTML = "<span class='wordCount'>" + values.length + "</span>" + " words total";
 
         for (var x = 0; x < values.length; x++) {
@@ -28,17 +34,19 @@
         }
       }
 
-      function searchWordsAndUpdateList() {
+      // Custom function which will be used when searching for words
+      function searchAndUpdate() {
         $('#resultBox').find('option').remove().end();
         var dict = new Dictionary(words);
         var values = dict.search($("#findWord").val());
-        fillWithWords(values);
+        fill(values);
       }
 
+      // Custom function which will be used to reset the list to the original state
       function clearInput() {
         var dict = new Dictionary(words);
         var values = dict.all();
-        fillWithWords(values);
+        fill(values);
       }
       
     </script>
@@ -101,7 +109,7 @@
       <div class="input">
         <form>
           <label>Find:</label>
-          <input type="input" id="findWord" name="findWord" onkeyup="searchWordsAndUpdateList()" placeholder="Enter characters or words to find" required>
+          <input type="input" id="findWord" name="findWord" onkeyup="searchAndUpdate()" placeholder="Enter characters or words to find" required>
           <input type="reset" id="btn" onclick="clearInput()" value="Clear">
           <br>
           <p id="wordCountMessage"></p>
