@@ -65,6 +65,10 @@
       width: 100%;
     }
 
+    h1{
+      text-align: center;
+    }
+
     .main{
       height: 700px;
       width: 100%;
@@ -102,11 +106,27 @@
       color: aquamarine;
     }
 
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1; 
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #555; 
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: aquamarine; 
+    }
     </style>
   </head>
   <body>
     <div class="main">
       <div class="input">
+        <h1>Word Finder</h1>
         <form>
           <label>Find:</label>
           <input type="input" id="findWord" name="findWord" onkeyup="searchAndUpdate()" placeholder="Enter characters or words to find" required>
