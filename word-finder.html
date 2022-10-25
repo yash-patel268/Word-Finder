@@ -5,19 +5,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Word Finder</title>
 
-    <!-- Load any supplemental Javascript libraries here -->
     <script type="text/javascript" src="jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="words-small.json"></script>
 
-    <!-- <script type="text/javascript" src="words-large.json"></script> -->
+    <!-- <script type="text/javascript" src="words-large.json"></script>  -->
 
     <script type="text/javascript" src="dictionary.js"></script>
 
     <script type="text/javascript">
-      // <![CDATA[
-      
-      // This allows the Javascript code inside this block to only run when the page
-      // has finished loading in the browser.
+    
       $(document).ready(function() {
         var dict = new Dictionary(words);
         var values = dict.all();
@@ -25,7 +21,7 @@
       });
 
       function fillWithWords(values) {
-        document.getElementById("wordCountMessage").innerHTML = values.length + " words total";
+        document.getElementById("wordCountMessage").innerHTML = "<span class='wordCount'>" + values.length + "</span>" + " words total";
 
         for (var x = 0; x < values.length; x++) {
           $('#resultBox').append('<option value="' + values[x] + '">' + values[x] + '</option>');
@@ -45,14 +41,14 @@
         fillWithWords(values);
       }
       
-      // ]]>
-      </script>
+    </script>
 
     <style type="text/css">
-
-    /* Your CSS here */
+      
     html {
-        background-color: #eee;
+        background-color: black;
+        color:white;
+        font-family: "Times New Roman", Times, serif;
     }
 
     body{
@@ -73,11 +69,29 @@
       margin: 0;
     }
 
+    #btn{
+      background-color: aquamarine;
+      color: black;
+    }
+
+    input{
+      font-family: "Times New Roman", Times, serif;
+    }
+
+    #findWord {
+      width: 207px;
+    }
+
     #resultBox {
-      height: 300px;
+      height: auto;
+      max-height: 300px;
       width: 300px;
       border: 1px solid #ccc;
       overflow: auto;
+    }
+
+    .wordCount {
+      color: aquamarine;
     }
 
     </style>
@@ -87,10 +101,10 @@
       <div class="input">
         <form>
           <label>Find:</label>
-          <input type="text" id="findWord" name="findWord" onkeyup="searchWordsAndUpdateList()" required>
-          <input type="reset" onclick="clearInput()" value="Reset">
+          <input type="input" id="findWord" name="findWord" onkeyup="searchWordsAndUpdateList()" placeholder="Enter characters or words to find" required>
+          <input type="reset" id="btn" onclick="clearInput()" value="Clear">
           <br>
-          <label id="wordCountMessage"></label>
+          <p id="wordCountMessage"></p>
           <div id="resultBox"></div>
         </form>
       </div>
